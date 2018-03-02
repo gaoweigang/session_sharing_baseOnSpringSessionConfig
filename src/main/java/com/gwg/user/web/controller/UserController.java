@@ -28,8 +28,8 @@ public class UserController extends BaseController{
 	 * 查询用户信息
 	 */
 	@RequestMapping(value="getList",method=RequestMethod.GET)
-	public @ResponseBody Result getList(){
-		logger.info("getList 获取用户信息列表...");
+	public @ResponseBody Result getList(HttpServletRequest request){
+		logger.info("getList 获取用户信息列表...sessionid:{}", request.getSession().getId());
 		return new Result(true, "获取用户列表成功", userDB.values(), "200");
 	}
 	
@@ -37,8 +37,8 @@ public class UserController extends BaseController{
 	 * 添加用户信息
 	 */
 	@RequestMapping(value="addUser", method=RequestMethod.POST)
-	public @ResponseBody Result addUser(@RequestBody UserDto userDto) {		
-		logger.info("add 添加用户信息...");
+	public @ResponseBody Result addUser(@RequestBody UserDto userDto, HttpServletRequest request) {		
+		logger.info("add 添加用户信息...sessionid:{}", request.getSession().getId());
 
         if (userDB.get(userDto.getAccount()) != null) {
             return new Result(false, "添加失败, 用户名" + userDto.getAccount() + "已存在", null, "500");

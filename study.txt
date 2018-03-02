@@ -10,6 +10,28 @@ HttpSession是通过Servlet容器创建和管理的，像Tomcat/Jetty都是保�
 2、设计一个Filter，利用HttpServletRequestWrapper，实现自己的 getSession()方法，接管创建和管理Session数据的工作。spring-session就是通过这样的
 思路实现的。
 
+
+在使用默认配置的情况下，仅需要如下两步：
+1.引入Maven依赖
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.session</groupId>
+    <artifactId>spring-session</artifactId>
+</dependency>
+
+2.配置Springboot的配置文件application.xml
+spring:
+  #Redis集群地址，这里使用的Springboot的自动配置功能
+  redis:
+    cluster:
+       nodes: 10.9.15.32:6388,10.9.15.33:6383,10.9.15.34:6382,10.9.15.35:6382,10.9.15.36:6389,10.9.15.38:6379
+  #配置SpringSession使用redis存储HttpSession;使用了@EnableSpringHttpSession注解，就不需要配置spring.session.store-type= redis
+  session: 
+    store-type: redis
+
 2.Spring Boot之No session repository could be auto-configured, check your configuration问题解决
 http://blog.csdn.net/blueheart20/article/details/56677338
 我们发现session store type使用来存放session的存储方式，目前Spring boot中只支持redis方式。 

@@ -1,5 +1,7 @@
 package com.gwg.user.web.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -21,8 +23,8 @@ public class IndexController {
 	 * 初始化登录页面
 	 */
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String login_view(){
-		logger.info("访问登录页面....");
+	public String login_view(HttpServletRequest request){
+		logger.info("访问登录页面...sessionid:{}", request.getSession().getId());
 	    return "login";	
 	}
 	
