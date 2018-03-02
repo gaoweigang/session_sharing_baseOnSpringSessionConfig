@@ -1,0 +1,34 @@
+一.spring-session实现分布式集群session的共享
+HttpSession是通过Servlet容器创建和管理的，像Tomcat/Jetty都是保存在内存中的。但是我们把应用搭建成分布式的集群，然后利用LVS或Nginx做负载均衡，
+那么来自同一用户的Http请求将有可能被分发到多个不同的应用中。那问题来了，如何保证不同的应用能够共享同一份session数据呢？最简单的想法,就是把session
+数据保存到内存以外的一个统一的地方，例如Memcached/Redis等数据库中。那问题又来了，如何替换掉Servlet容器创建和管理的HttpSession的实现呢？
+
+1、利用Servlet容器提供的插件功能，自定义HttpSession的创建和管理策略，并通过配置的方式替换掉默认的策略。这方面其实早就有开源项目了，
+例如memcached-session-manager(可以参考负载均衡+session共享(memcached-session-manager实现)，以及tomcat-redis-session-manager。
+不过这种方式有个缺点，就是需要耦合Tomcat/Jetty等Servlet容器的代码。
+
+2、设计一个Filter，利用HttpServletRequestWrapper，实现自己的 getSession()方法，接管创建和管理Session数据的工作。spring-session就是通过这样的
+思路实现的。
+
+2.Spring Boot之No session repository could be auto-configured, check your configuration问题解决
+http://blog.csdn.net/blueheart20/article/details/56677338
+我们发现session store type使用来存放session的存储方式，目前Spring boot中只支持redis方式。 
+
+
+
+
+
+
+
+后续问题：
+2.spring session实现分布式session
+
+跨域session共享
+
+3.SpringBoot配置类WebMvcConfigurerAdapter
+
+4.SpringBoot配置拦截器
+
+
+5.CROS 跨域
+

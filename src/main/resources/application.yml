@@ -1,0 +1,14 @@
+spring:
+  redis:
+    cluster:
+       nodes: 10.9.15.32:6388,10.9.15.33:6383,10.9.15.34:6382,10.9.15.35:6382,10.9.15.36:6389,10.9.15.38:6379
+  session: 
+    store-type: redis  
+  mvc: 
+    view: 
+       prefix: /WEB-INF/jsp/
+       suffix: .jsp    
+
+server:
+     port: 8090
+     
