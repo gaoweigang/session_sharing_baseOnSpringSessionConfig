@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>测试session共享,每次发送一次请求都生成一个sessionId,该sessionId存放在redis中</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+        function getUsers(btn) {
+            console.log("getUsers");
+            var $btn = $(btn);
+            $.ajax({
+                type: 'get',
+                url: 'http://localhost:8090/api/user/getList',
+                contentType: "application/json;charset=UTF-8"  //如果改为 application/json ，则是复杂的跨域请求
+            }).then(
+                function (obj) {
+                    $btn.next('p').html(JSON.stringify(obj));
+                },
+                function () {
+                    $btn.next('p').html('error...');
+                }
+            )
+        }
+
+        function addUser(btn) {
+            var $btn = $(btn);
+            var name = $btn.next('input').val();
+            if (!name) {
+                $btn.next('input').next('p').html('用户名不能为空');
+                return;
+            }
+            $.ajax({
+                type: 'post',
+                url: 'http://localhost:8090/api/user/addUser',
+                contentType: "application/json;charset=UTF-8",
+                data: "{\"account\":\""+name+"\"}",
+                dataType: 'json'
+            }).then(
+                function (obj) {
+                    $btn.next('input').next('p').html(JSON.stringify(obj));
+                },
+                function () {
+                    $btn.next('input').next('p').html('error...');
+                }
+            )
+        }
+
+    </script>
+</head>
+<body>
+<h>你已成功访问到主页面！</h><br/>
+<hr>
+
+<input type="button" value="获取用户" id="getUsers" onclick="getUsers(this)">
+<p class="am-text-danger"></p>
+<hr>
+
+<input type="button" value="添加用户" id="complex_cors" onclick="addUser(this)">
+<input type="text" placeholder="用户名">
+<p color="red"></p>
+
+</body>
+</html>

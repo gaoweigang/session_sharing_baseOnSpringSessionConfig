@@ -5,10 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.gwg.user.common.Constant;
 import com.gwg.user.common.Result;
@@ -16,8 +13,10 @@ import com.gwg.user.dto.UserDto;
 
 /**
  * 自Spring4.3开始推荐使用注解来解决一个类中多个方法
+ *
+ *
  */
-@Controller
+@RestController
 @RequestMapping("/api/user")
 public class UserController extends BaseController{
 	

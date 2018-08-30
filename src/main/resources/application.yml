@@ -1,11 +1,12 @@
 spring:
+  #application:
+    #name: shiro
   redis:
-    cluster:
-       nodes: 10.9.15.32:6388,10.9.15.33:6383,10.9.15.34:6382,10.9.15.35:6382,10.9.15.36:6389,10.9.15.38:6379
-  mvc: 
-    view: 
-       prefix: /WEB-INF/jsp/
-       suffix: .jsp    
+    sentinel:
+      master: redis-sentinel
+      nodes: 192.168.13.63:26382,192.168.13.62:26382
+    password: abcd_123456
+
 
 server:
      port: 8090

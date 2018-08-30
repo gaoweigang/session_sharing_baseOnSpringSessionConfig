@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.example</groupId>
-	<artifactId>sample_session_sharing_baseOnSpringSessionConfig</artifactId>
+	<artifactId>session_sharing_baseOnSpringSessionConfig</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<parent>
@@ -29,19 +29,12 @@
             <artifactId>spring-session-data-redis</artifactId>
         </dependency>
 
-		<!-- 使用 jsp 必要依赖 -->
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- servlet 依赖 -->
-		<dependency>
+		<!--<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
-		</dependency>
+		</dependency>-->
 
 
 		<!--logback日志组件 -->
