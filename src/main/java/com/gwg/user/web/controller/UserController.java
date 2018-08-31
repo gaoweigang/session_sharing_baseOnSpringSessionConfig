@@ -14,7 +14,7 @@ import com.gwg.user.dto.UserDto;
 /**
  * 自Spring4.3开始推荐使用注解来解决一个类中多个方法
  *
- *
+ * 每次访问后台服务都会生成一个新的SessionId，存放在redis中
  */
 @RestController
 @RequestMapping("/api/user")
